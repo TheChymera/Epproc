@@ -5,7 +5,8 @@ def Load(picture):
     faceCasc = cv2.CascadeClassifier('/usr/share/OpenCV/haarcascades/haarcascade_frontalface_default.xml')
     leyeCasc = cv2.CascadeClassifier('/usr/share/OpenCV/haarcascades/haarcascade_lefteye_2splits.xml')
     reyeCasc = cv2.CascadeClassifier('/usr/share/OpenCV/haarcascades/haarcascade_righteye_2splits.xml')
-    return(pic, faceCasc, leyeCasc, reyeCasc)
+    eyesCasc = cv2.CascadeClassifier('/usr/share/OpenCV/haarcascades/haarcascade_mcs_eyepair_small.xml')
+    return(pic, faceCasc, leyeCasc, reyeCasc, eyesCasc)
 
 def Display(image):
     cv2.namedWindow('Red Eye Test', flags=0)
@@ -35,9 +36,17 @@ def mk_ffile(globalpath, filename, fails):
         failwriter.writerow(i)
     failfile.close()
     
-#                pt1 = (int(x * img_scale), int(y * img_scale))
-#                pt2 = (int((x+w) * img_scale), int((y+h) * img_scale))
-#                cv2.rectangle(picture, pt1, pt2, cv2.cv.RGB(255, 0, 0), 3, 8, 0)
-    
-    
-    
+def draw_featureareas(img_scale, picture, face, eyes):
+    a,b,c,d = tuple(face[0]*img_scale)
+    pt3 = (a, b)
+    pt4 = (a+c, b+d)
+    cv2.rectangle(picture, pt3, pt4, cv2.cv.RGB(0, 255, 0), 3, 8, 0)
+    x,y,w,h = tuple(eyes[0]*img_scale)
+    pt1 = (x, y)
+    pt2 = (x+w, y+h)
+    cv2.rectangle(picture, pt1, pt2, cv2.cv.RGB(255, 0, 0), 3, 8, 0)    
+
+def lecenter(area):
+    x,y,w,h = tuple(area[0])
+    ct = (int(x+round(w/2)), int(y+round(h/2)))
+    return ct
