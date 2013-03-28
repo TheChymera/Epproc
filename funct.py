@@ -50,3 +50,9 @@ def lecenter(area):
     x,y,w,h = tuple(area[0])
     ct = (int(x+round(w/2)), int(y+round(h/2)))
     return ct
+    
+def lescale(values, upscale, downscale=1):
+	from numpy import array
+	values = array(values)
+	values = values * upscale / downscale
+	return values.astype(int)
