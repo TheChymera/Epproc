@@ -9,6 +9,7 @@ import cv2
 import numpy as np
 
 #INPUT
+localpath = path.realpath(__file__)
 profile = 'processing/profiles/faces.pp3'# .pp3 file for rawtherapee RAW to PNG processing (as relative to global dir)
 globalpath = '~/Data/face-pictures/'
 folder_in = 'fin/'
@@ -48,7 +49,7 @@ haar_flags_eyes = 0
 globalpath = path.expanduser(globalpath)
 img_path = globalpath + folder_in
 out_path = globalpath +  folder_out
-profile = globalpath + profile
+profile = localpath + profile
 lelist = []
 lelist = list(lelist)
 w1 = img_w*100
