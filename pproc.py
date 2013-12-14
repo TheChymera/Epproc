@@ -9,7 +9,7 @@ import cv2
 import numpy as np
 
 #INPUT
-localpath = path.realpath(__file__)
+localpath = path.dirname(path.realpath(__file__)) + '/'
 profile = 'processing/profiles/faces.pp3'# .pp3 file for rawtherapee RAW to PNG processing (as relative to global dir)
 globalpath = '~/Data/face-pictures/'
 folder_in = 'fin/'
